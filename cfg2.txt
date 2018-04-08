@@ -1,0 +1,60 @@
+Begin -> int Next
+Begin -> void Next
+Begin -> main Open
+Next -> main Open
+Vd -> void
+Vd -> $
+Open -> ( Vd ) { Body }
+Body -> $
+Body -> Test ID ; Body
+Body -> for ( Loop ) { Body }
+Test -> $
+Test -> float
+Test -> char
+Test -> int
+ID -> varname S1
+S1 -> $
+S1 -> , ID
+S1 -> = Init
+Init -> Constant Ending
+Ending -> $
+Ending -> , ID
+Constant -> Number Expr
+Constant -> ' varname '
+Loop -> ID S2
+Loop -> ; S5
+S2 -> = S3
+S2 -> ; S5
+S3 -> ID S4
+S3 -> Number S4
+S4 -> ; S5
+S4 -> , Loop
+S5 -> ID S6
+S5 -> ; S9
+S6 -> RelOp S7
+S7 -> ID S8
+S7 -> Number S8
+S8 -> ; S9
+S8 -> BitOp S5
+S9 -> ID S10
+S9 -> $
+S10 -> + + S11
+S10 -> - - S11
+S11 -> $
+S11 -> , S9
+RelOp -> < Eq
+RelOp -> > Eq
+RelOp -> = Eq
+Eq -> =
+Eq -> $
+BitOp -> & BitOp1
+BitOp -> | BitOp2
+BitOp1 -> &
+BitOp2 -> |
+Expr -> ArithOp Number
+Expr -> BitOp Number
+Expr -> $
+ArithOp -> +
+ArithOp -> -
+ArithOp -> *
+ArithOp -> /

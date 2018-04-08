@@ -1,0 +1,60 @@
+Begin	~	int	Next	{int}
+Begin	~	void	Next	{void}
+Begin	~	main	Open	{main}
+Next	~	main	Open	{main}
+Vd	~	void	{void}
+Vd	~	$	{)}
+Open	~	(	Vd	)	{	Body	}	{(}
+Body	~	$	{}}
+Body	~	Test	ID	;	Body	{varname float char int}
+Body	~	for	(	Loop	)	{	Body	}	{for}
+Test	~	$	{varname}
+Test	~	float	{float}
+Test	~	char	{char}
+Test	~	int	{int}
+ID	~	varname	S1	{varname}
+S1	~	$	{; < > = + - & |}
+S1	~	,	ID	{,}
+S1	~	=	Init	{=}
+Init	~	Constant	Ending	{Number '}
+Ending	~	$	{;}
+Ending	~	,	ID	{,}
+Constant	~	Number	Expr	{Number}
+Constant	~	'	varname	'	{'}
+Loop	~	ID	S2	{varname}
+Loop	~	;	S5	{;}
+S2	~	=	S3	{=}
+S2	~	;	S5	{;}
+S3	~	ID	S4	{varname}
+S3	~	Number	S4	{Number}
+S4	~	;	S5	{;}
+S4	~	,	Loop	{,}
+S5	~	ID	S6	{varname}
+S5	~	;	S9	{;}
+S6	~	RelOp	S7	{< > =}
+S7	~	ID	S8	{varname}
+S7	~	Number	S8	{Number}
+S8	~	;	S9	{;}
+S8	~	BitOp	S5	{& |}
+S9	~	ID	S10	{varname}
+S9	~	$	{)}
+S10	~	+	+	S11	{+}
+S10	~	-	-	S11	{-}
+S11	~	$	{)}
+S11	~	,	S9	{,}
+RelOp	~	<	Eq	{<}
+RelOp	~	>	Eq	{>}
+RelOp	~	=	Eq	{=}
+Eq	~	=	{=}
+Eq	~	$	{varname Number}
+BitOp	~	&	BitOp1	{&}
+BitOp	~	|	BitOp2	{|}
+BitOp1	~	&	{&}
+BitOp2	~	|	{|}
+Expr	~	ArithOp	Number	{+ - * /}
+Expr	~	BitOp	Number	{| &}
+Expr	~	$	{, ;}
+ArithOp	~	+	{+}
+ArithOp	~	-	{-}
+ArithOp	~	*	{*}
+ArithOp	~	/	{/}
